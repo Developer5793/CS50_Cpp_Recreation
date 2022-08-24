@@ -25,8 +25,10 @@ int main()
 			//Algorithm to count the lenght of an integer
 			long long int CountInt = z;
 			long long int len = 1;
-			if (CountInt > 0) {
-				for (len = 0; CountInt > 0; len++) {
+			if (CountInt > 0) 
+			{
+				for (len = 0; CountInt > 0; len++) 
+				{
 					CountInt = CountInt / 10;
 				}
 			}
@@ -45,16 +47,19 @@ int main()
 			//std::cout << result << endl;
 
 			k = len;
-			for (f = 1; f <= len; f++) {
+			for (f = 1; f <= len; f++) 
+			{
 				k = k - 1;
 				d = pow(10, k);
 
-				if (k % 2 == 0) {
+				if (k % 2 == 0) 
+				{
 					result = z / (d) % 10;
 					std::cout << result << endl;
 
 				}
-				else if (k % 2 == 1) {
+				else if (k % 2 == 1) 
+				{
 					result = (z / (d) % 10) * 2;
 					std::cout << result << endl;
 				}
@@ -65,10 +70,12 @@ int main()
 			std::cout << sum << endl;
 			std::cout << checkfraud << endl;
 
-			if (checkfraud != 0) {
+			if (checkfraud != 0) 
+			{
 				std::cout << "The Card is fraudulent" << endl;
 			}
-			else if (checkfraud == 0) {
+			else if (checkfraud == 0) 
+			{
 				std::cout << "The number is valid" << endl;
 			}
 		}
