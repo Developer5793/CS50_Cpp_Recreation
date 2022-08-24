@@ -1,7 +1,7 @@
 // CreditCardNumbers.cpp : Diese Datei enthält die Funktion "main". Hier beginnt und endet die Ausführung des Programms.
 
 
-//A proggramm to check if Credit Card numbers are valid//
+//A programm to check if Credit Card numbers are valid//
 
 
 
