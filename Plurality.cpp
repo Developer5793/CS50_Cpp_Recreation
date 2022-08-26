@@ -154,7 +154,7 @@ void print_winner(void)
     //Sorting the input array one by one. First by second, first by third....
     for (int i = 0; i < counter; i++)
     {
-        for ( int n=1+i ; n<counter; n++)
+        for ( int n= ; n<counter; n++)
         {
             if (candidates[i + n].votes > candidates[i].votes)
             {
