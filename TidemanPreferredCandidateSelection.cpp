@@ -38,7 +38,7 @@ int candidate_count;
 // Function prototypes
 bool vote(string name, int rank);
 void record_preferences(int ranks[], string namesarr[]);
-void add_pairs(int voter_count, int ranks[], string namesarr[]);
+void add_pairs(int ranks[], string namesarr[]);
 void sort_pairs(void);
 void lock_pairs(void);
 void print_winner(void);
@@ -46,6 +46,7 @@ void print_winner(void);
 const int len = 1000;
 char inputnames[len];
 int counter;
+int voter_count;
 
 string namesarr[9];
 string name;
@@ -132,7 +133,7 @@ int main()
     pair_count = 0;
 
     cout << "Type in number of voters: ";
-    int voter_count;
+   
     cin >> voter_count;
     cout << endl;
 
@@ -165,8 +166,11 @@ int main()
         }
         record_preferences(ranks, namesarr);
         printf("\n");
+
+        add_pairs(ranks, namesarr);
     }
-    //add_pairs(voter_count, ranks,namesarr);
+
+    
     sort_pairs();
     lock_pairs();
     print_winner();
@@ -206,26 +210,26 @@ void record_preferences(int ranks[], string namesarr[])
         cout <<"Name: " << namesarr[d] << endl;
         cout <<"Rank: " << ranks[d] << endl;
     }
+    return;
 }
 
 // Record pairs of candidates where one is preferred over the other
-void add_pairs(int voter_count, int ranks[], string namesarr[])
+void add_pairs(int ranks[], string namesarr[])
 {
-    for (int g = 0; g < voter_count; g++)
-    {   
         for (int winnercounter = 0; winnercounter < counter; winnercounter++)
         {
-             for (int losercounter = 1; losercounter < counter; losercounter++)
-             {
-                    WinnerandLoserPairs[0] = namesarr[winnercounter];
-                    WinnerandLoserPairs[1] = namesarr[losercounter];
-
-                    cout <<"Winner: "<< WinnerandLoserPairs[0] << endl;
-                    cout<<"Loser: "<< WinnerandLoserPairs[1] << endl;
-                    cout << endl;
-             }
+            for (int losercounter = winnercounter+1; losercounter < counter; losercounter++)
+            {
+                 if (namesarr[winnercounter] != namesarr[losercounter])
+                 {
+                     WinnerandLoserPairs[0] = namesarr[winnercounter];
+                     WinnerandLoserPairs[1] = namesarr[losercounter];
+                     cout << "Winner: " << WinnerandLoserPairs[0] << endl;
+                     cout << "Loser: " << WinnerandLoserPairs[1] << endl;
+                     cout << endl;
+                 }
+            }
         }
-    }
    return;
 }
 
