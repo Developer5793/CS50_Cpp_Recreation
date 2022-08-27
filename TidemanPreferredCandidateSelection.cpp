@@ -52,11 +52,13 @@ string name;
 int ranks[9];
 int candidaterank;
 
+//Array with max possibilities of one winning over the other// Candidate 1 can win 8 times over the other ones etc.
+string WinnerandLoserPairs[100];
 
 int main()
 {
     int z = 0;
-
+  
     cout << "Type in the Candidates names and press enter please: ";
 
 
@@ -70,11 +72,11 @@ int main()
     //Enable input of candidates with any number of spaces in between before or after and count number of candidates then 
 
     if (LastCharacter == ' ') {
-        counter = 0;
+       counter = 0;
         for (int z = 0; z < len; z++) {
             if (inputnames[z] >= 'a' && inputnames[z] <= 'z' && inputnames[z + 1] == ' ' || inputnames[z] >= 'A' && inputnames[z] <= 'Z' && inputnames[z] == ' ')
             {
-                counter++;
+               counter++;
             }
             cout << inputnames[z];
         }
@@ -148,6 +150,7 @@ int main()
             cout << endl;
 
             //Compare each input name with predefined candidate array and if it fits to candidate array & ranks 1-9 fill in the user inputs in arrays
+            //DEBUG here if someone ranks one person one the same rank two times/writes the same name twice for the same rank
             if (!vote(name, candidaterank))
             {
                 printf("Invalid vote. Vote again please \n");
@@ -163,7 +166,7 @@ int main()
         record_preferences(ranks, namesarr);
         printf("\n");
     }
-    add_pairs(voter_count, ranks,namesarr);
+    //add_pairs(voter_count, ranks,namesarr);
     sort_pairs();
     lock_pairs();
     print_winner();
@@ -173,7 +176,7 @@ int main()
 //Check for valid vote 
 bool vote(string name, int candidaterank)
 {
-    for (int z = 0; z < 8; z++)
+    for (int z = 0; z < counter; z++)
     {
         if (strcmp(candidates[z].c_str(), name.c_str()) == 0 && 0 < candidaterank && candidaterank <= counter)
         {
@@ -186,28 +189,44 @@ bool vote(string name, int candidaterank)
 // Update preferences given one voter's ranks and rank the candidates from first to last
 void record_preferences(int ranks[], string namesarr[])
 {
-    for (int b = 0; b < counter; b++)
+    for (int q = 0; q < counter; q++)
     {
-        for (int n = 1; n < counter; n++)
+        //Sorting the array of voted candidates first by second, second by third, third by fourth...
+        for (int b = 0; b < counter; b++)
         {
-            if (ranks[b] > ranks[b + n] && ranks[b]!=0 && ranks[b+n]!=0)
+            if ( ranks[b] > ranks[b + 1] && ranks[b+1] != 0 && ranks [b]!=0)
             {
-                swap(ranks[b], ranks[b + n]);
-                swap(namesarr[b], namesarr[b + n]);
+                swap(ranks[b], ranks[b + 1]);
+                swap(namesarr[b], namesarr[b + 1]);
             }
-        }
-        cout << "Name: " << namesarr[b] << endl;
-        cout << "Rank: " << ranks[b] << endl; 
-    } 
+        }      
+    }
+    for(int d=0; d<counter; d++)
+    {
+        cout <<"Name: " << namesarr[d] << endl;
+        cout <<"Rank: " << ranks[d] << endl;
+    }
 }
 
 // Record pairs of candidates where one is preferred over the other
 void add_pairs(int voter_count, int ranks[], string namesarr[])
 {
     for (int g = 0; g < voter_count; g++)
-    {
+    {   
+        for (int winnercounter = 0; winnercounter < counter; winnercounter++)
+        {
+             for (int losercounter = 1; losercounter < counter; losercounter++)
+             {
+                    WinnerandLoserPairs[0] = namesarr[winnercounter];
+                    WinnerandLoserPairs[1] = namesarr[losercounter];
+
+                    cout <<"Winner: "<< WinnerandLoserPairs[0] << endl;
+                    cout<<"Loser: "<< WinnerandLoserPairs[1] << endl;
+                    cout << endl;
+             }
+        }
     }
-    return;
+   return;
 }
 
 // Sort pairs in decreasing order by strength of victory
