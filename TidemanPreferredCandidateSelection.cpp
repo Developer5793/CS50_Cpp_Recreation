@@ -52,8 +52,6 @@ string name;
 int ranks[9];
 int candidaterank;
 
-//Array with max possibilities of one winning over the other// Candidate 1 can win 8 times over the other ones etc.
-string WinLoserPairArr[8 + 7 + 6 + 5 + 4 + 3 + 2 + 1];
 
 int main()
 {
@@ -190,7 +188,7 @@ void record_preferences(int ranks[], string namesarr[])
 {
     for (int b = 0; b < counter; b++)
     {
-        for (int n = 1; n == counter; n++)
+        for (int n = 1; n < counter; n++)
         {
             if (ranks[b] > ranks[b + n] && ranks[b]!=0 && ranks[b+n]!=0)
             {
