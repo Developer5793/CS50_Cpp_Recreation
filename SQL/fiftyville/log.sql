@@ -1,10 +1,10 @@
 -- Keep a log of any SQL queries you execute as you solve the mystery.
-SELECT description FROM crime_scene_reports WHERE id=295;
+SELECT description FROM crime_scene_reports;
 SELECT name, transcript FROM interviews WHERE day=28 AND month=7 AND year=2021;
 
 
 -------1. Query given on most information of the interviews------
-SELECT Distinct people.name
+SELECT people.name
 FROM people
 JOIN bakery_security_logs
 ON people.license_plate = bakery_security_logs.license_plate
